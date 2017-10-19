@@ -148,12 +148,12 @@
 					<generateApplicationXml>true</generateApplicationXml>
 					<modules>
 						<jarModule>
-							<groupId>com.cabyflower.service</groupId>
+							<groupId>com.cabyflowerservice</groupId>
 							<artifactId>cabyflower-domain</artifactId>
 							<bundleFileName>cabyflower-domain.jar</bundleFileName>
 						</jarModule>
 						<jarModule>
-							<groupId>com.cabyflower.service</groupId>
+							<groupId>com.cabyflowerservice</groupId>
 							<artifactId>cabyflower-library</artifactId>
 							<bundleFileName>cabyflower-library.jar</bundleFileName>
 						</jarModule>
@@ -193,15 +193,15 @@
 							<bundleFileName>commons-email.jar</bundleFileName>
 						</jarModule>
 						<ejbModule>
-							<groupId>com.cabyflower.service</groupId>
+							<groupId>com.cabyflowerservice</groupId>
 							<artifactId>cabyflower-ejb</artifactId>
 							<bundleFileName>cabyflower-ejb.jar</bundleFileName>
 						</ejbModule>
 						<webModule>
-							<groupId>com.cabyflower.service</groupId>
+							<groupId>com.cabyflowerservice</groupId>
 							<artifactId>cabyflower-controller</artifactId>
 							<bundleFileName>cabyflower-controller.war</bundleFileName>
-							<contextRoot>/kf</contextRoot>
+							<contextRoot>/cb</contextRoot>
 						</webModule>
 					</modules>
 				</configuration>

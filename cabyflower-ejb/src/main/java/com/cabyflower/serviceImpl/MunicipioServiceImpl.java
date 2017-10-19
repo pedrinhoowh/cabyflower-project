@@ -5,12 +5,9 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.MunicipioDTO;
 import com.cabyflower.entity.Municipio;
@@ -18,11 +15,9 @@ import com.cabyflower.service.MunicipioService;
 import com.cabyflower.service.UfService;
 
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class MunicipioServiceImpl implements MunicipioService {
 	
-	@PersistenceContext(unitName = "nameDB")
+	@PersistenceContext(unitName = "cabyflowerUI")
 	private EntityManager em;
 
 	@EJB

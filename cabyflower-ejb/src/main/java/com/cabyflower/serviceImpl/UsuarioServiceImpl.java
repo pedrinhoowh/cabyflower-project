@@ -1,12 +1,9 @@
 package com.cabyflower.serviceImpl;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.TipoUsuarioDTO;
 import com.cabiflower.dto.UsuarioDTO;
@@ -18,11 +15,9 @@ import exception.SenhaException;
 import util.SenhaUtil;
 
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class UsuarioServiceImpl implements UsuarioService {
 
-	@PersistenceContext(unitName = "nameDB")
+	@PersistenceContext(unitName = "cabyflowerUI")
 	private EntityManager em;
 
 	/**

@@ -2,9 +2,6 @@ package com.cabyflower.serviceImpl;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.EnderecoDTO;
 import com.cabyflower.entity.Endereco;
@@ -12,8 +9,6 @@ import com.cabyflower.service.EnderecoService;
 import com.cabyflower.service.MunicipioService;
 
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class EnderecoServiceImpl implements EnderecoService {
 
 	@EJB

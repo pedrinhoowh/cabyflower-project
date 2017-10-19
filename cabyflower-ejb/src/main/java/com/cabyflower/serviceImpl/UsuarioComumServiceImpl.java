@@ -2,12 +2,9 @@ package com.cabyflower.serviceImpl;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.UsuarioComumDTO;
 import com.cabyflower.entity.UsuarioComum;
@@ -16,11 +13,9 @@ import com.cabyflower.service.UsuarioComumService;
 import com.cabyflower.service.UsuarioService;
 
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class UsuarioComumServiceImpl implements UsuarioComumService{
 	
-	@PersistenceContext(unitName = "nameDB")
+	@PersistenceContext(unitName = "cabyflowerUI")
 	private EntityManager em;
 	
 	@EJB

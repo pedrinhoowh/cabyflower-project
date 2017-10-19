@@ -4,23 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.UfDTO;
 import com.cabyflower.entity.Uf;
 import com.cabyflower.service.UfService;
 
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class UfServiceImpl implements UfService {
 	
-	@PersistenceContext(unitName = "nameDB")
+	@PersistenceContext(unitName = "cabyflowerUI")
 	private EntityManager em;
 
 	/**

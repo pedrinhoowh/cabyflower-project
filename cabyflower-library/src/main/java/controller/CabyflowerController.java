@@ -2,9 +2,6 @@ package controller;
 
 import java.io.Serializable;
 
-import javax.ejb.TransactionManagement;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
@@ -18,8 +15,6 @@ import util.ObjectUtil;
  * @author Pedro Cotta
  *
  */
-@TransactionManagement
-@Transactional(value = TxType.NOT_SUPPORTED)
 public class CabyflowerController implements Serializable {
 
     private static final long serialVersionUID = -6673042185930635030L;

@@ -5,12 +5,9 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
 
 import com.cabiflower.dto.ProdutoDTO;
 import com.cabiflower.dto.TipoProdutoDTO;
@@ -24,11 +21,9 @@ import com.cabyflower.service.ProdutoService;
  *
  */
 @Stateless
-@Transactional(value = TxType.NOT_SUPPORTED)
-@TransactionManagement
 public class ProdutoServiceImpl implements ProdutoService {
 	
-	@PersistenceContext(unitName = "nameDB")
+	@PersistenceContext(unitName = "cabyflowerUI")
 	private EntityManager em;
 
 	@EJB
