@@ -39,7 +39,7 @@ public class Usuario implements Serializable{
 	private String password;
 	
 	@OneToOne(mappedBy = "tipoUsuario")
-	@JoinColumn(name = "TIP_USER", nullable = false)
+	@JoinColumn(name = "SEQ_TIPO_USUARIO", nullable = false)
 	private TipoUsuario tipoUsuario;
 	
     @Temporal(TemporalType.DATE)
