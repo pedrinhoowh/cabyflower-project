@@ -18,7 +18,7 @@ public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_EMPRESA")
-	private String seqEmpresa;
+	private Long seqEmpresa;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
@@ -50,11 +50,11 @@ public class Empresa implements Serializable {
 	public Empresa() {
 	}
 
-	public String getSeqEmpresa() {
+	public Long getSeqEmpresa() {
 		return this.seqEmpresa;
 	}
 
-	public void setSeqEmpresa(String seqEmpresa) {
+	public void setSeqEmpresa(Long seqEmpresa) {
 		this.seqEmpresa = seqEmpresa;
 	}
 

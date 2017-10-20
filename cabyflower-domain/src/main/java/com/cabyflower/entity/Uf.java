@@ -1,8 +1,15 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -17,7 +24,7 @@ public class Uf implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_UF")
-	private String seqUf;
+	private Long seqUf;
 
 	@Column(name="NOM_UF")
 	private String nomUf;
@@ -29,11 +36,11 @@ public class Uf implements Serializable {
 	public Uf() {
 	}
 
-	public String getSeqUf() {
+	public Long getSeqUf() {
 		return this.seqUf;
 	}
 
-	public void setSeqUf(String seqUf) {
+	public void setSeqUf(Long seqUf) {
 		this.seqUf = seqUf;
 	}
 

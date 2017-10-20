@@ -28,8 +28,8 @@ public class UfServiceImpl implements UfService {
 	public Uf convertUfDtoInUf(UfDTO ufDTO) {
 		Uf uf = new Uf();
 		if (ufDTO.getIdUf() != null)
-			uf.setIdUf(ufDTO.getIdUf());
-		uf.setNomeUf(ufDTO.getNomeUf());
+			uf.setSeqUf(ufDTO.getIdUf());
+		uf.setNomUf(ufDTO.getNomeUf());
 		return uf;
 	}
 
@@ -42,8 +42,8 @@ public class UfServiceImpl implements UfService {
 	@Override
 	public UfDTO convertUfInUfDTO(Uf uf) {
 		UfDTO ufDto = new UfDTO();
-		ufDto.setIdUf(uf.getIdUf() != null ? uf.getIdUf() : null);
-		ufDto.setNomeUf(uf.getNomeUf());
+		ufDto.setIdUf(uf.getSeqUf() != null ? uf.getSeqUf() : null);
+		ufDto.setNomeUf(uf.getNomUf());
 		return ufDto;
 	}
 	

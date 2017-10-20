@@ -23,12 +23,12 @@ public class EnderecoServiceImpl implements EnderecoService {
 	@Override
 	public Endereco convertEnderecoDTOInEndereco(EnderecoDTO enderecoDTO) {
 		Endereco endereco = new Endereco();
-		endereco.setIdEndereco(enderecoDTO.getIdEndereco() != null ? enderecoDTO.getIdEndereco() : null);
-		endereco.setComplemento(enderecoDTO.getComplemento() != null ? enderecoDTO.getComplemento() : null);
-		endereco.setBairro(enderecoDTO.getBairro());
+		endereco.setSeqEndereco(enderecoDTO.getIdEndereco() != null ? enderecoDTO.getIdEndereco() : null);
+		endereco.setDesComplemento(enderecoDTO.getComplemento() != null ? enderecoDTO.getComplemento() : null);
+		endereco.setDesBairro(enderecoDTO.getBairro());
 		endereco.setMunicipio(municipioService.convertMunicipioDTOInMunicipio(enderecoDTO.getMunicipio()));
-		endereco.setNumero(enderecoDTO.getNumero());
-		endereco.setRua(enderecoDTO.getRua());
+		endereco.setNumEndereco(enderecoDTO.getNumero());
+		endereco.setDesRua(enderecoDTO.getRua());
 		return endereco;
 	}
 
@@ -41,12 +41,12 @@ public class EnderecoServiceImpl implements EnderecoService {
 	@Override
 	public EnderecoDTO convertEnderecoInEnderecoDTO(Endereco endereco) {
 		EnderecoDTO enderecoDTO = new EnderecoDTO();
-		enderecoDTO.setIdEndereco(endereco.getIdEndereco() != null ? endereco.getIdEndereco() : null);
-		enderecoDTO.setComplemento(endereco.getComplemento() != null ? endereco.getComplemento() : null);
-		enderecoDTO.setBairro(endereco.getBairro());
+		enderecoDTO.setIdEndereco(endereco.getSeqEndereco() != null ? endereco.getSeqEndereco() : null);
+		enderecoDTO.setComplemento(endereco.getDesComplemento() != null ? endereco.getDesComplemento() : null);
+		enderecoDTO.setBairro(endereco.getDesBairro());
 		enderecoDTO.setMunicipio(municipioService.convertMunicipioInMunicipioDTO(endereco.getMunicipio()));
-		enderecoDTO.setNumero(endereco.getNumero());
-		enderecoDTO.setRua(endereco.getRua());
+		enderecoDTO.setNumero(endereco.getNumEndereco());
+		enderecoDTO.setRua(endereco.getDesRua());
 		return enderecoDTO;
 	}
 

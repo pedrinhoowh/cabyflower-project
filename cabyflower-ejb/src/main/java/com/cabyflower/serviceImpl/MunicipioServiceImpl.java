@@ -32,8 +32,8 @@ public class MunicipioServiceImpl implements MunicipioService {
 	@Override
 	public Municipio convertMunicipioDTOInMunicipio(MunicipioDTO municipioDTO) {
 		Municipio municipio = new Municipio();
-		municipio.setIdMunicipio(municipioDTO.getIdMunicipio() != null ? municipioDTO.getIdMunicipio() : null);
-		municipio.setNomeMunicipio(municipioDTO.getNomeMunicipio());
+		municipio.setSeqMunicipio(municipioDTO.getIdMunicipio() != null ? municipioDTO.getIdMunicipio() : null);
+		municipio.setNomMunicipio(municipioDTO.getNomeMunicipio());
 		municipio.setUf(ufService.convertUfDtoInUf(municipioDTO.getUf()));
 		return municipio;
 	}
@@ -47,8 +47,8 @@ public class MunicipioServiceImpl implements MunicipioService {
 	@Override
 	public MunicipioDTO convertMunicipioInMunicipioDTO(Municipio municipio) {
 		MunicipioDTO municipioDTO = new MunicipioDTO();
-		municipioDTO.setIdMunicipio(municipio.getIdMunicipio() != null ? municipio.getIdMunicipio() : null);
-		municipioDTO.setNomeMunicipio(municipio.getNomeMunicipio());
+		municipioDTO.setIdMunicipio(municipio.getSeqMunicipio() != null ? municipio.getSeqMunicipio() : null);
+		municipioDTO.setNomeMunicipio(municipio.getNomMunicipio());
 		municipioDTO.setUf(ufService.convertUfInUfDTO(municipio.getUf()));
 		return municipioDTO;
 	}

@@ -18,7 +18,7 @@ public class TipoProduto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_TIPO_PRODUTO")
-	private String seqTipoProduto;
+	private Long seqTipoProduto;
 
 	@Column(name="DES_TIPO_PRODUTO")
 	private String desTipoProduto;
@@ -30,11 +30,15 @@ public class TipoProduto implements Serializable {
 	public TipoProduto() {
 	}
 
-	public String getSeqTipoProduto() {
+	public TipoProduto(Long seqTipoProduto) {
+		this.seqTipoProduto = seqTipoProduto;
+	}
+	
+	public Long getSeqTipoProduto() {
 		return this.seqTipoProduto;
 	}
 
-	public void setSeqTipoProduto(String seqTipoProduto) {
+	public void setSeqTipoProduto(Long seqTipoProduto) {
 		this.seqTipoProduto = seqTipoProduto;
 	}
 

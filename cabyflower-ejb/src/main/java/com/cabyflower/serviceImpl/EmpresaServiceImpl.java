@@ -41,7 +41,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public EmpresaDTO save(EmpresaDTO empresaDTO) {
 		Empresa empresa = this.convertEmpresaDTOInEmpresa(empresaDTO);
-		if (empresa.getIdEmpresa() != null)
+		if (empresa.getSeqEmpresa() != null)
 			em.merge(empresa);
 		else
 			em.persist(empresa);
@@ -57,14 +57,14 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public Empresa convertEmpresaDTOInEmpresa(EmpresaDTO empresaDTO) {
 		Empresa empresa = new Empresa();
-		empresa.setIdEmpresa(empresaDTO.getIdEmpresa() != null ? empresaDTO.getIdEmpresa() : null);
-		empresa.setCnpj(empresaDTO.getCnpj());
+		empresa.setSeqEmpresa(empresaDTO.getIdEmpresa() != null ? empresaDTO.getIdEmpresa() : null);
+		empresa.setTexCnpj(empresaDTO.getCnpj());
 		empresa.setEndereco(enderecoService.convertEnderecoDTOInEndereco(empresaDTO.getEndereco()));
-		empresa.setNomeFantasia(empresaDTO.getNomeFantasia());
+		empresa.setNomFantasia(empresaDTO.getNomeFantasia());
 		empresa.setProdutos(produtoService.convertListProdutoDTOInListProduto(empresaDTO.getProdutos()));
-		empresa.setRazaoSocial(empresaDTO.getRazaoSocial());
+		empresa.setDesRazaoSocial(empresaDTO.getRazaoSocial());
 		empresa.setUsuario(usuarioService.convertUsuarioDTOInUsuario(empresaDTO.getUsuario()));
-		empresa.setDataCriacao(empresaDTO.getDataCriacao());
+		empresa.setDatCriacao(empresaDTO.getDataCriacao());
 		return empresa;
 	}
 
@@ -76,14 +76,14 @@ public class EmpresaServiceImpl implements EmpresaService {
 	 */
 	public EmpresaDTO convertEmpresaInEmpresaDTO(Empresa empresa) {
 		EmpresaDTO empresaDTO = new EmpresaDTO();
-		empresaDTO.setIdEmpresa(empresa.getIdEmpresa() != null ? empresa.getIdEmpresa() : null);
-		empresaDTO.setCnpj(empresa.getCnpj());
+		empresaDTO.setIdEmpresa(empresa.getSeqEmpresa() != null ? empresa.getSeqEmpresa() : null);
+		empresaDTO.setCnpj(empresa.getTexCnpj());
 		empresaDTO.setEndereco(enderecoService.convertEnderecoInEnderecoDTO(empresa.getEndereco()));
-		empresaDTO.setNomeFantasia(empresa.getNomeFantasia());
+		empresaDTO.setNomeFantasia(empresa.getNomFantasia());
 		empresaDTO.setProdutos(produtoService.convertListProdutoInListProdutoDTO(empresa.getProdutos()));
-		empresaDTO.setRazaoSocial(empresa.getRazaoSocial());
+		empresaDTO.setRazaoSocial(empresa.getDesRazaoSocial());
 		empresaDTO.setUsuario(usuarioService.convertUsuarioInUsuarioDTO(empresa.getUsuario()));
-		empresaDTO.setDataCriacao(empresa.getDataCriacao());
+		empresaDTO.setDataCriacao(empresa.getDatCriacao());
 		return empresaDTO;
 	}
 	

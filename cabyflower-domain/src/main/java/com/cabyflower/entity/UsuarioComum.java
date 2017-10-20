@@ -18,7 +18,7 @@ public class UsuarioComum implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_USUARIO_COMUM")
-	private String seqUsuarioComum;
+	private Long seqUsuarioComum;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_NASCIMENTO")
@@ -40,11 +40,11 @@ public class UsuarioComum implements Serializable {
 	public UsuarioComum() {
 	}
 
-	public String getSeqUsuarioComum() {
+	public Long getSeqUsuarioComum() {
 		return this.seqUsuarioComum;
 	}
 
-	public void setSeqUsuarioComum(String seqUsuarioComum) {
+	public void setSeqUsuarioComum(Long seqUsuarioComum) {
 		this.seqUsuarioComum = seqUsuarioComum;
 	}
 

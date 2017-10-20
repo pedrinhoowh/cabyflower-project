@@ -1,7 +1,7 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class UsuarioComumDTO implements Serializable {
 	
@@ -11,7 +11,7 @@ public class UsuarioComumDTO implements Serializable {
 	
 	private String nome;
 	
-	private LocalDate nascimento;
+	private Date nascimento;
 	
 	private EnderecoDTO endereco;
 	
@@ -33,11 +33,11 @@ public class UsuarioComumDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public LocalDate getNascimento() {
+	public Date getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(LocalDate nascimento) {
+	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
 

@@ -1,10 +1,20 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.math.BigInteger;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -19,7 +29,7 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_PRODUTO")
-	private String seqProduto;
+	private Long seqProduto;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
@@ -35,7 +45,7 @@ public class Produto implements Serializable {
 	private BigInteger quaProduto;
 
 	@Column(name="VAL_PRODUTO")
-	private BigDecimal valProduto;
+	private Double valProduto;
 
 	//bi-directional many-to-one association to Empresa
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -50,11 +60,11 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public String getSeqProduto() {
+	public Long getSeqProduto() {
 		return this.seqProduto;
 	}
 
-	public void setSeqProduto(String seqProduto) {
+	public void setSeqProduto(Long seqProduto) {
 		this.seqProduto = seqProduto;
 	}
 
@@ -90,11 +100,11 @@ public class Produto implements Serializable {
 		this.quaProduto = quaProduto;
 	}
 
-	public BigDecimal getValProduto() {
+	public Double getValProduto() {
 		return this.valProduto;
 	}
 
-	public void setValProduto(BigDecimal valProduto) {
+	public void setValProduto(Double valProduto) {
 		this.valProduto = valProduto;
 	}
 

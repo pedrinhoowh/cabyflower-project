@@ -1,6 +1,7 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 public class EnderecoDTO implements Serializable{
 	
@@ -12,7 +13,7 @@ public class EnderecoDTO implements Serializable{
 	
 	private String bairro;
 	
-	private Long numero;
+	private BigInteger numero;
 	
 	private String complemento;
 	
@@ -42,11 +43,11 @@ public class EnderecoDTO implements Serializable{
 		this.bairro = bairro;
 	}
 
-	public Long getNumero() {
+	public BigInteger getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Long numero) {
+	public void setNumero(BigInteger numero) {
 		this.numero = numero;
 	}
 

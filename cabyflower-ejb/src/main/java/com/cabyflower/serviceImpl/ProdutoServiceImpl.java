@@ -53,14 +53,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public Produto convertProdutoDTOInProduto(ProdutoDTO produtoDTO) {
 		Produto produto = new Produto();
-		produto.setIdProduto(produtoDTO.getIdProduto() != null ? produtoDTO.getIdProduto() : null);
-		produto.setDescricaoProduto(produtoDTO.getDescricaoProduto());
+		produto.setSeqProduto(produtoDTO.getIdProduto() != null ? produtoDTO.getIdProduto() : null);
+		produto.setDesProduto(produtoDTO.getDescricaoProduto());
 		produto.setEmpresa(empresaService.convertEmpresaDTOInEmpresa(produtoDTO.getEmpresa()));
-		produto.setNomeProduto(produtoDTO.getNomeProduto());
-		produto.setQuantidade(produtoDTO.getQuantidade());
-		produto.setValorProduto(produtoDTO.getValorProduto());
+		produto.setNomProduto(produtoDTO.getNomeProduto());
+		produto.setQuaProduto(produtoDTO.getQuantidade());
+		produto.setValProduto(produtoDTO.getValorProduto());
 		produto.setTipoProduto(new TipoProduto(produtoDTO.getTipoProduto().getIdTipoProduto()));
-		produto.setDataCriacao(produtoDTO.getDataCriacao());;
+		produto.setDatCriacao(produtoDTO.getDataCriacao());;
 		return produto;
 	}
 
@@ -88,14 +88,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public ProdutoDTO ConvertProdutoInProdutoDTO(Produto produto) {
 		ProdutoDTO produtoDTO = new ProdutoDTO();
-		produtoDTO.setIdProduto(produto.getIdProduto() != null ? produto.getIdProduto() : null);
-		produtoDTO.setDescricaoProduto(produto.getDescricaoProduto());
+		produtoDTO.setIdProduto(produto.getSeqProduto() != null ? produto.getSeqProduto() : null);
+		produtoDTO.setDescricaoProduto(produto.getDesProduto());
 		produtoDTO.setEmpresa(empresaService.convertEmpresaInEmpresaDTO(produto.getEmpresa()));
-		produtoDTO.setNomeProduto(produto.getNomeProduto());
-		produtoDTO.setQuantidade(produto.getQuantidade());
-		produtoDTO.setValorProduto(produto.getValorProduto());
-		produtoDTO.setTipoProduto(new TipoProdutoDTO(produto.getTipoProduto().getIdTipoProduto()));
-		produtoDTO.setDataCriacao(produto.getDataCriacao());
+		produtoDTO.setNomeProduto(produto.getNomProduto());
+		produtoDTO.setQuantidade(produto.getQuaProduto());
+		produtoDTO.setValorProduto(produto.getValProduto());
+		produtoDTO.setTipoProduto(new TipoProdutoDTO(produto.getTipoProduto().getSeqTipoProduto()));
+		produtoDTO.setDataCriacao(produto.getDatCriacao());
 		return produtoDTO;
 	}
 	
@@ -122,7 +122,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public ProdutoDTO save(ProdutoDTO produtoDTO) {
 		Produto produto = this.convertProdutoDTOInProduto(produtoDTO);
-		if(produto.getIdProduto() != null)
+		if(produto.getSeqProduto() != null)
 			em.merge(produto);
 		else
 			em.persist(produto);

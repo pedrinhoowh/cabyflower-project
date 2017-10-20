@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_USER")
-	private String seqUser;
+	private Long seqUser;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
@@ -49,11 +49,11 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public String getSeqUser() {
+	public Long getSeqUser() {
 		return this.seqUser;
 	}
 
-	public void setSeqUser(String seqUser) {
+	public void setSeqUser(Long seqUser) {
 		this.seqUser = seqUser;
 	}
 

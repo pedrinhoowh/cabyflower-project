@@ -33,9 +33,9 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	@Override
 	public UsuarioComum convertDTOInEntity(UsuarioComumDTO usuarioComumDTO) {
 		UsuarioComum usuarioComum = new UsuarioComum();
-		usuarioComum.setIdUsuarioComum(usuarioComumDTO.getIdUsuarioComum() != null ? usuarioComumDTO.getIdUsuarioComum() : null);
-		usuarioComum.setNascimento(usuarioComumDTO.getNascimento());
-		usuarioComum.setNome(usuarioComumDTO.getNome() != null ? usuarioComumDTO.getNome() : null);
+		usuarioComum.setSeqUsuarioComum(usuarioComumDTO.getIdUsuarioComum() != null ? usuarioComumDTO.getIdUsuarioComum() : null);
+		usuarioComum.setDatNascimento(usuarioComumDTO.getNascimento());
+		usuarioComum.setNomUsuarioComum(usuarioComumDTO.getNome() != null ? usuarioComumDTO.getNome() : null);
 		usuarioComum.setUsuario(usuarioService.convertUsuarioDTOInUsuario(usuarioComumDTO.getUsuario()));
 		usuarioComum.setEndereco(enderecoService.convertEnderecoDTOInEndereco(usuarioComumDTO.getEndereco()));
 		return usuarioComum;
@@ -50,9 +50,9 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	@Override
 	public UsuarioComumDTO convertEntityInDTO(UsuarioComum usuarioComum) {
 		UsuarioComumDTO usuarioComumDTO = new UsuarioComumDTO();
-		usuarioComumDTO.setIdUsuarioComum(usuarioComum.getIdUsuarioComum() != null ? usuarioComum.getIdUsuarioComum() : null);
-		usuarioComumDTO.setNascimento(usuarioComum.getNascimento());
-		usuarioComumDTO.setNome(usuarioComum.getNome() != null ? usuarioComum.getNome() : null);
+		usuarioComumDTO.setIdUsuarioComum(usuarioComum.getSeqUsuarioComum() != null ? usuarioComum.getSeqUsuarioComum() : null);
+		usuarioComumDTO.setNascimento(usuarioComum.getDatNascimento());
+		usuarioComumDTO.setNome(usuarioComum.getNomUsuarioComum() != null ? usuarioComum.getNomUsuarioComum() : null);
 		usuarioComumDTO.setUsuario(usuarioService.convertUsuarioInUsuarioDTO(usuarioComum.getUsuario()));
 		usuarioComumDTO.setEndereco(enderecoService.convertEnderecoInEnderecoDTO(usuarioComum.getEndereco()));
 		return usuarioComumDTO;
@@ -67,7 +67,7 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	@Override
 	public UsuarioComumDTO save(UsuarioComumDTO usuarioComumDTO) {
 		UsuarioComum usuarioComum = this.convertDTOInEntity(usuarioComumDTO);
-		if(usuarioComum.getIdUsuarioComum() != null)
+		if(usuarioComum.getSeqUsuarioComum() != null)
 			em.merge(usuarioComum);
 		else
 			em.persist(usuarioComum);

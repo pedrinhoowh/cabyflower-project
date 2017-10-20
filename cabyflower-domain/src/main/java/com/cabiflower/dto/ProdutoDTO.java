@@ -1,7 +1,8 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.math.BigInteger;
+import java.util.Date;
 
 public class ProdutoDTO implements Serializable{
 
@@ -15,13 +16,13 @@ public class ProdutoDTO implements Serializable{
 	
 	private String descricaoProduto;
 	
-	private Long quantidade;
+	private BigInteger quantidade;
 	
 	private EmpresaDTO empresa;
 	
 	private TipoProdutoDTO tipoProduto;
 	
-	private LocalDate dataCriacao;
+	private Date dataCriacao;
 
 	public Long getIdProduto() {
 		return idProduto;
@@ -55,11 +56,11 @@ public class ProdutoDTO implements Serializable{
 		this.descricaoProduto = descricaoProduto;
 	}
 
-	public Long getQuantidade() {
+	public BigInteger getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Long quantidade) {
+	public void setQuantidade(BigInteger quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -79,11 +80,11 @@ public class ProdutoDTO implements Serializable{
 		this.tipoProduto = tipoProduto;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 	

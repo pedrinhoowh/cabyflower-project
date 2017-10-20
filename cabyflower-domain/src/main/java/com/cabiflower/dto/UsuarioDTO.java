@@ -1,7 +1,7 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class UsuarioDTO implements Serializable {
 
@@ -15,7 +15,7 @@ public class UsuarioDTO implements Serializable {
 
 	private TipoUsuarioDTO tipoUsuario;
 	
-	private LocalDate dataCriacao;
+	private Date dataCriacao;
 
 	private Boolean ativo;
 
@@ -51,11 +51,11 @@ public class UsuarioDTO implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 

@@ -17,7 +17,7 @@ public class Municipio implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_MUNICIPIO")
-	private String seqMunicipio;
+	private Long seqMunicipio;
 
 	@Column(name="DES_BAIRRO")
 	private String desBairro;
@@ -37,11 +37,11 @@ public class Municipio implements Serializable {
 	public Municipio() {
 	}
 
-	public String getSeqMunicipio() {
+	public Long getSeqMunicipio() {
 		return this.seqMunicipio;
 	}
 
-	public void setSeqMunicipio(String seqMunicipio) {
+	public void setSeqMunicipio(Long seqMunicipio) {
 		this.seqMunicipio = seqMunicipio;
 	}
 

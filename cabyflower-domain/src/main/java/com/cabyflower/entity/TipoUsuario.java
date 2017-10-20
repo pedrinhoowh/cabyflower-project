@@ -1,8 +1,16 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -18,7 +26,7 @@ public class TipoUsuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="SEQ_TIPO_USUARIO")
-	private String seqTipoUsuario;
+	private Long seqTipoUsuario;
 
 	@Column(name="DES_TIPO_USUARIO")
 	private String desTipoUsuario;
@@ -29,12 +37,16 @@ public class TipoUsuario implements Serializable {
 
 	public TipoUsuario() {
 	}
-
-	public String getSeqTipoUsuario() {
+	
+	public TipoUsuario(Long seqTipoUsuario) {
+		this.seqTipoUsuario = seqTipoUsuario;
+	}
+	
+	public Long getSeqTipoUsuario() {
 		return this.seqTipoUsuario;
 	}
 
-	public void setSeqTipoUsuario(String seqTipoUsuario) {
+	public void setSeqTipoUsuario(Long seqTipoUsuario) {
 		this.seqTipoUsuario = seqTipoUsuario;
 	}
 

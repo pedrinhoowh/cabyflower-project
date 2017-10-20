@@ -30,11 +30,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public UsuarioDTO save(UsuarioDTO usuarioDTO) throws SenhaException {
 		Usuario usuario = this.convertUsuarioDTOInUsuario(usuarioDTO);
-		if (usuario.getIdUser() != null) {
-			this.comparaSenhaDB(usuario.getPassword(), this.getInEmail(usuario.getLoginUser()));
+		if (usuario.getSeqUser() != null) {
+			this.comparaSenhaDB(usuario.getDesSenha(), this.getInEmail(usuario.getDesLogin()));
 			em.merge(usuario);
 		} else {
-			usuario.setPassword(criptografaSenha(usuario.getPassword()));
+			usuario.setDesSenha(criptografaSenha(usuario.getDesSenha()));
 			em.persist(usuario);
 		}
 		return this.convertUsuarioInUsuarioDTO(usuario);
@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 */
 	private void comparaSenhaDB(String senha, Usuario usuario) throws SenhaException {
 		String senhaCriptografada = criptografaSenha(senha);
-		if (!usuario.getPassword().equals(senhaCriptografada)) {
+		if (!usuario.getDesSenha().equals(senhaCriptografada)) {
 			throw new SenhaException();
 		}
 	}
@@ -71,12 +71,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario convertUsuarioDTOInUsuario(UsuarioDTO usuarioDTO) {
 		Usuario usuario = new Usuario();
-		usuario.setAtivo(usuarioDTO.getAtivo());
-		usuario.setDataCriacao(usuarioDTO.getDataCriacao());
-		usuario.setPassword(usuarioDTO.getPassword());
-		usuario.setLoginUser(usuarioDTO.getLoginUser());
+		usuario.setDatCriacao(usuarioDTO.getDataCriacao());
+		usuario.setDesSenha(usuarioDTO.getPassword());
+		usuario.setDesLogin(usuarioDTO.getLoginUser());
 		usuario.setTipoUsuario(new TipoUsuario(usuarioDTO.getTipoUsuario().getIdTipoUsuario()));
-		usuario.setIdUser(usuarioDTO.getIdUser() != null ? usuarioDTO.getIdUser() : null);
+		usuario.setSeqUser(usuarioDTO.getIdUser() != null ? usuarioDTO.getIdUser() : null);
 		return usuario;
 	}
 
@@ -89,12 +88,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public UsuarioDTO convertUsuarioInUsuarioDTO(Usuario usuario) {
 		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		usuarioDTO.setAtivo(usuario.getAtivo());
-		usuarioDTO.setDataCriacao(usuario.getDataCriacao());
-		usuarioDTO.setLoginUser(usuario.getLoginUser());
-		usuarioDTO.setPassword(usuario.getPassword());
-		usuarioDTO.setTipoUsuario(new TipoUsuarioDTO(usuario.getTipoUsuario().getIdTipoUsuario()));
-		usuarioDTO.setIdUser(usuario.getIdUser() != null ? usuario.getIdUser() : null);
+		usuarioDTO.setDataCriacao(usuario.getDatCriacao());
+		usuarioDTO.setLoginUser(usuario.getDesLogin());
+		usuarioDTO.setPassword(usuario.getDesSenha());
+		usuarioDTO.setTipoUsuario(new TipoUsuarioDTO(usuario.getTipoUsuario().getSeqTipoUsuario()));
+		usuarioDTO.setIdUser(usuario.getSeqUser() != null ? usuario.getSeqUser() : null);
 		return usuarioDTO;
 	}
 
