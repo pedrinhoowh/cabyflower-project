@@ -1,94 +1,143 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the ENDERECO database table.
+ * 
+ */
 @Entity
-@Table(name = "ENDERECO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEndereco", scope = Endereco.class)
-public class Endereco implements Serializable{
-
-	private static final long serialVersionUID = 3180067818970738965L;
+@NamedQuery(name="Endereco.findAll", query="SELECT e FROM Endereco e")
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "SEQ_ENDERECO", nullable = false, unique = true )
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idEndereco;
-	
-	@Size(max = 500)
-	@Column(name = "DES_RUA", nullable = false)
-	private String rua;
-	
-	@Size(max = 500)
-	@Column(name = "DES_BAIRRO", nullable = false)
-	private String bairro;
-	
-	@Column(name = "NUM_ENDERECO", nullable = false)
-	private Long numero;
-	
-	@Column(name = "DES_COMPLEMENTO")
-	private String complemento;
-	
-	@JoinColumn(name = "SEQ_MUNICIPIO", nullable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_ENDERECO")
+	private String seqEndereco;
+
+	@Column(name="DES_BAIRRO")
+	private String desBairro;
+
+	@Column(name="DES_COMPLEMENTO")
+	private String desComplemento;
+
+	@Column(name="DES_RUA")
+	private String desRua;
+
+	@Column(name="NUM_ENDERECO")
+	private BigInteger numEndereco;
+
+	//bi-directional many-to-one association to Empresa
+	@OneToMany(mappedBy="endereco")
+	private List<Empresa> empresas;
+
+	//bi-directional many-to-one association to Municipio
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_MUNICIPIO")
 	private Municipio municipio;
 
-	public Long getIdEndereco() {
-		return idEndereco;
+	//bi-directional many-to-one association to UsuarioComum
+	@OneToMany(mappedBy="endereco")
+	private List<UsuarioComum> usuarioComums;
+
+	public Endereco() {
 	}
 
-	public void setIdEndereco(Long idEndereco) {
-		this.idEndereco = idEndereco;
+	public String getSeqEndereco() {
+		return this.seqEndereco;
 	}
 
-	public String getRua() {
-		return rua;
+	public void setSeqEndereco(String seqEndereco) {
+		this.seqEndereco = seqEndereco;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public String getDesBairro() {
+		return this.desBairro;
 	}
 
-	public String getBairro() {
-		return bairro;
+	public void setDesBairro(String desBairro) {
+		this.desBairro = desBairro;
 	}
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public String getDesComplemento() {
+		return this.desComplemento;
 	}
 
-	public Long getNumero() {
-		return numero;
+	public void setDesComplemento(String desComplemento) {
+		this.desComplemento = desComplemento;
 	}
 
-	public void setNumero(Long numero) {
-		this.numero = numero;
+	public String getDesRua() {
+		return this.desRua;
+	}
+
+	public void setDesRua(String desRua) {
+		this.desRua = desRua;
+	}
+
+	public BigInteger getNumEndereco() {
+		return this.numEndereco;
+	}
+
+	public void setNumEndereco(BigInteger numEndereco) {
+		this.numEndereco = numEndereco;
+	}
+
+	public List<Empresa> getEmpresas() {
+		return this.empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+	public Empresa addEmpresa(Empresa empresa) {
+		getEmpresas().add(empresa);
+		empresa.setEndereco(this);
+
+		return empresa;
+	}
+
+	public Empresa removeEmpresa(Empresa empresa) {
+		getEmpresas().remove(empresa);
+		empresa.setEndereco(null);
+
+		return empresa;
 	}
 
 	public Municipio getMunicipio() {
-		return municipio;
+		return this.municipio;
 	}
 
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
 
-	public String getComplemento() {
-		return complemento;
+	public List<UsuarioComum> getUsuarioComums() {
+		return this.usuarioComums;
 	}
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setUsuarioComums(List<UsuarioComum> usuarioComums) {
+		this.usuarioComums = usuarioComums;
+	}
+
+	public UsuarioComum addUsuarioComum(UsuarioComum usuarioComum) {
+		getUsuarioComums().add(usuarioComum);
+		usuarioComum.setEndereco(this);
+
+		return usuarioComum;
+	}
+
+	public UsuarioComum removeUsuarioComum(UsuarioComum usuarioComum) {
+		getUsuarioComums().remove(usuarioComum);
+		usuarioComum.setEndereco(null);
+
+		return usuarioComum;
 	}
 
 }

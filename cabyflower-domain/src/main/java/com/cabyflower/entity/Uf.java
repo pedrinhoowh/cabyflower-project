@@ -1,48 +1,70 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the UF database table.
+ * 
+ */
 @Entity
-@Table(name = "UF")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUf", scope = Uf.class)
-public class Uf implements Serializable{
-	
-	private static final long serialVersionUID = 3180067818970738965L;
-	
+@NamedQuery(name="Uf.findAll", query="SELECT u FROM Uf u")
+public class Uf implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name = "SEQ_UF", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idUf;
-	
-	@Size(max = 500)
-	@Column(name = "NOM_UF", nullable = false)
-	private String nomeUf;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_UF")
+	private String seqUf;
 
-	public Long getIdUf() {
-		return idUf;
+	@Column(name="NOM_UF")
+	private String nomUf;
+
+	//bi-directional many-to-one association to Municipio
+	@OneToMany(mappedBy="uf")
+	private List<Municipio> municipios;
+
+	public Uf() {
 	}
 
-	public void setIdUf(Long idUf) {
-		this.idUf = idUf;
+	public String getSeqUf() {
+		return this.seqUf;
 	}
 
-	public String getNomeUf() {
-		return nomeUf;
+	public void setSeqUf(String seqUf) {
+		this.seqUf = seqUf;
 	}
 
-	public void setNomeUf(String nomeUf) {
-		this.nomeUf = nomeUf;
+	public String getNomUf() {
+		return this.nomUf;
 	}
-	
+
+	public void setNomUf(String nomUf) {
+		this.nomUf = nomUf;
+	}
+
+	public List<Municipio> getMunicipios() {
+		return this.municipios;
+	}
+
+	public void setMunicipios(List<Municipio> municipios) {
+		this.municipios = municipios;
+	}
+
+	public Municipio addMunicipio(Municipio municipio) {
+		getMunicipios().add(municipio);
+		municipio.setUf(this);
+
+		return municipio;
+	}
+
+	public Municipio removeMunicipio(Municipio municipio) {
+		getMunicipios().remove(municipio);
+		municipio.setUf(null);
+
+		return municipio;
+	}
+
 }

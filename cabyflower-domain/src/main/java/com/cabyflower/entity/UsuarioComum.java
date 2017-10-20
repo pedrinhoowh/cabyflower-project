@@ -1,75 +1,71 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the USUARIO_COMUM database table.
+ * 
+ */
 @Entity
-@Table(name = "USUARIO_COMUM")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuarioComum", scope = UsuarioComum.class)
-public class UsuarioComum implements Serializable{
-
-	private static final long serialVersionUID = 3180067818970738965L;
+@Table(name="USUARIO_COMUM")
+@NamedQuery(name="UsuarioComum.findAll", query="SELECT u FROM UsuarioComum u")
+public class UsuarioComum implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "SEQ_USUARIO_COMUM", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idUsuarioComum;
-	
-	@Size(max = 400)
-	@Column(name = "NOM_USUARIO_COMUM", nullable = false)
-	private String nome;
-	
-    @Temporal(TemporalType.DATE)
-	@Column(name = "DAT_NASCIMENTO", nullable = false)
-	private LocalDate nascimento;
-	
-	@OneToOne(mappedBy = "endereco")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_USUARIO_COMUM")
+	private String seqUsuarioComum;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="DAT_NASCIMENTO")
+	private Date datNascimento;
+
+	@Column(name="NOM_USUARIO_COMUM")
+	private String nomUsuarioComum;
+
+	//bi-directional many-to-one association to Endereco
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_ENDERECO")
 	private Endereco endereco;
 
-	@JoinColumn(name = "SEQ_USUARIO", nullable = false)
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_USUARIO")
 	private Usuario usuario;
 
-	public Long getIdUsuarioComum() {
-		return idUsuarioComum;
+	public UsuarioComum() {
 	}
 
-	public void setIdUsuarioComum(Long idUsuarioComum) {
-		this.idUsuarioComum = idUsuarioComum;
+	public String getSeqUsuarioComum() {
+		return this.seqUsuarioComum;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setSeqUsuarioComum(String seqUsuarioComum) {
+		this.seqUsuarioComum = seqUsuarioComum;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public Date getDatNascimento() {
+		return this.datNascimento;
 	}
 
-	public LocalDate getNascimento() {
-		return nascimento;
+	public void setDatNascimento(Date datNascimento) {
+		this.datNascimento = datNascimento;
 	}
 
-	public void setNascimento(LocalDate nascimento) {
-		this.nascimento = nascimento;
+	public String getNomUsuarioComum() {
+		return this.nomUsuarioComum;
+	}
+
+	public void setNomUsuarioComum(String nomUsuarioComum) {
+		this.nomUsuarioComum = nomUsuarioComum;
 	}
 
 	public Endereco getEndereco() {
-		return endereco;
+		return this.endereco;
 	}
 
 	public void setEndereco(Endereco endereco) {
@@ -77,7 +73,7 @@ public class UsuarioComum implements Serializable{
 	}
 
 	public Usuario getUsuario() {
-		return usuario;
+		return this.usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {

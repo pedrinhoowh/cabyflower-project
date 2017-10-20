@@ -1,69 +1,71 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the TIPO_USUARIO database table.
+ * 
+ */
 @Entity
-@Table(name = "TIPO_USUARIO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTipoUsuario", scope = TipoUsuario.class)
+@Table(name="TIPO_USUARIO")
+@NamedQuery(name="TipoUsuario.findAll", query="SELECT t FROM TipoUsuario t")
 public class TipoUsuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 3180067818970738965L;
-
-	private static final Long USUARIO_COMUM = 1L;
-	
-	private static final Long USUARIO_ESTABELECIMENTO = 2L;
-	
 	@Id
-	@Column(name = "SEQ_TIPO_USUARIO", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idTipoUsuario;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_TIPO_USUARIO")
+	private String seqTipoUsuario;
 
-	@Size(max = 4000)
-	@Column(name = "DES_TIPO_USUARIO", nullable = false)
-	private String descricao;
+	@Column(name="DES_TIPO_USUARIO")
+	private String desTipoUsuario;
 
-	public Long getIdTipoUsuario() {
-		return idTipoUsuario;
-	}
-
-	public void setIdTipoUsuario(Long idTipoUsuario) {
-		this.idTipoUsuario = idTipoUsuario;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="tipoUsuario")
+	private List<Usuario> usuarios;
 
 	public TipoUsuario() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public TipoUsuario(Long tipoUsuario) {
-		this.idTipoUsuario = tipoUsuario;
 	}
 
-	public static Long getUsuarioComum() {
-		return USUARIO_COMUM;
+	public String getSeqTipoUsuario() {
+		return this.seqTipoUsuario;
 	}
 
-	public static Long getUsuarioEstabelecimento() {
-		return USUARIO_ESTABELECIMENTO;
+	public void setSeqTipoUsuario(String seqTipoUsuario) {
+		this.seqTipoUsuario = seqTipoUsuario;
 	}
-	
+
+	public String getDesTipoUsuario() {
+		return this.desTipoUsuario;
+	}
+
+	public void setDesTipoUsuario(String desTipoUsuario) {
+		this.desTipoUsuario = desTipoUsuario;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setTipoUsuario(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setTipoUsuario(null);
+
+		return usuario;
+	}
+
 }

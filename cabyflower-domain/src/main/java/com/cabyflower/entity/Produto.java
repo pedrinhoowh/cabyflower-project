@@ -1,100 +1,105 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the PRODUTO database table.
+ * 
+ */
 @Entity
-@Table(name = "PRODUTO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idProduto", scope = Produto.class)
-public class Produto implements Serializable{
-	
-	private static final long serialVersionUID = 3180067818970738965L;
+@NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p")
+public class Produto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "SEQ_PRODUTO", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idProduto;
-	
-	@Size(max = 400)
-	@Column(name = "NOM_PRODUTO", nullable = false)
-	private String nomeProduto;
-	
-	@Column(name = "VAL_PRODUTO", nullable = false)
-	private Double valorProduto;
-	
-	@Size(max = 4000)
-	@Column(name = "DES_PRODUTO")
-	private String descricaoProduto;
-	
-	@Column(name = "QUA_PRODUTO", nullable = false)
-	private Long quantidade;
-	
-	@JoinColumn(name = "SEQ_EMPRESA", nullable = false)
-	private Empresa empresa;
-	
-	@JoinColumn(name = "SEQ_TIPO_PRODUTO", nullable = false)
-	private TipoProduto tipoProduto;
-	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_PRODUTO")
+	private String seqProduto;
+
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DAT_CRIACAO", nullable = false)
-	private LocalDate dataCriacao;
+	@Column(name="DAT_CRIACAO")
+	private Date datCriacao;
 
-	public Long getIdProduto() {
-		return idProduto;
+	@Column(name="DES_PRODUTO")
+	private String desProduto;
+
+	@Column(name="NOM_PRODUTO")
+	private String nomProduto;
+
+	@Column(name="QUA_PRODUTO")
+	private BigInteger quaProduto;
+
+	@Column(name="VAL_PRODUTO")
+	private BigDecimal valProduto;
+
+	//bi-directional many-to-one association to Empresa
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_EMPRESA")
+	private Empresa empresa;
+
+	//bi-directional many-to-one association to TipoProduto
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_TIPO_PRODUTO")
+	private TipoProduto tipoProduto;
+
+	public Produto() {
 	}
 
-	public void setIdProduto(Long idProduto) {
-		this.idProduto = idProduto;
+	public String getSeqProduto() {
+		return this.seqProduto;
 	}
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public void setSeqProduto(String seqProduto) {
+		this.seqProduto = seqProduto;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public Date getDatCriacao() {
+		return this.datCriacao;
 	}
 
-	public Double getValorProduto() {
-		return valorProduto;
+	public void setDatCriacao(Date datCriacao) {
+		this.datCriacao = datCriacao;
 	}
 
-	public void setValorProduto(Double valorProduto) {
-		this.valorProduto = valorProduto;
+	public String getDesProduto() {
+		return this.desProduto;
 	}
 
-	public String getDescricaoProduto() {
-		return descricaoProduto;
+	public void setDesProduto(String desProduto) {
+		this.desProduto = desProduto;
 	}
 
-	public void setDescricaoProduto(String descricaoProduto) {
-		this.descricaoProduto = descricaoProduto;
+	public String getNomProduto() {
+		return this.nomProduto;
 	}
 
-	public Long getQuantidade() {
-		return quantidade;
+	public void setNomProduto(String nomProduto) {
+		this.nomProduto = nomProduto;
 	}
 
-	public void setQuantidade(Long quantidade) {
-		this.quantidade = quantidade;
+	public BigInteger getQuaProduto() {
+		return this.quaProduto;
+	}
+
+	public void setQuaProduto(BigInteger quaProduto) {
+		this.quaProduto = quaProduto;
+	}
+
+	public BigDecimal getValProduto() {
+		return this.valProduto;
+	}
+
+	public void setValProduto(BigDecimal valProduto) {
+		this.valProduto = valProduto;
 	}
 
 	public Empresa getEmpresa() {
-		return empresa;
+		return this.empresa;
 	}
 
 	public void setEmpresa(Empresa empresa) {
@@ -102,19 +107,11 @@ public class Produto implements Serializable{
 	}
 
 	public TipoProduto getTipoProduto() {
-		return tipoProduto;
+		return this.tipoProduto;
 	}
 
 	public void setTipoProduto(TipoProduto tipoProduto) {
 		this.tipoProduto = tipoProduto;
 	}
 
-	public LocalDate getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDate dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-	
 }

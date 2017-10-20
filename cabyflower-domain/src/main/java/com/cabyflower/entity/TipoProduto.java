@@ -1,63 +1,71 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the TIPO_PRODUTO database table.
+ * 
+ */
 @Entity
-@Table(name = "TIPO_PRODUTO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTipoUsuario", scope = TipoProduto.class)
+@Table(name="TIPO_PRODUTO")
+@NamedQuery(name="TipoProduto.findAll", query="SELECT t FROM TipoProduto t")
 public class TipoProduto implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 3180067818970738965L;
-
-	private static final Long PRODUTO_GOLDEN = 1L;
-	
-	private static final Long PRODUTO_PRATA = 2L;
-	
-	private static final Long PRODUTO_SILVER = 3L;
-	
 	@Id
-	@Column(name = "SEQ_TIPO_PRODUTO", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idTipoProduto;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_TIPO_PRODUTO")
+	private String seqTipoProduto;
 
-	@Size(max = 4000)
-	@Column(name = "DES_TIPO_PRODUTO", nullable = false)
-	private String descricao;
+	@Column(name="DES_TIPO_PRODUTO")
+	private String desTipoProduto;
 
-	public Long getIdTipoProduto() {
-		return idTipoProduto;
-	}
-
-	public void setIdTipoProduto(Long idTipoProduto) {
-		this.idTipoProduto = idTipoProduto;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+	//bi-directional many-to-one association to Produto
+	@OneToMany(mappedBy="tipoProduto")
+	private List<Produto> produtos;
 
 	public TipoProduto() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	public TipoProduto(Long tipoProduto) {
-		this.idTipoProduto = tipoProduto;
+
+	public String getSeqTipoProduto() {
+		return this.seqTipoProduto;
+	}
+
+	public void setSeqTipoProduto(String seqTipoProduto) {
+		this.seqTipoProduto = seqTipoProduto;
+	}
+
+	public String getDesTipoProduto() {
+		return this.desTipoProduto;
+	}
+
+	public void setDesTipoProduto(String desTipoProduto) {
+		this.desTipoProduto = desTipoProduto;
+	}
+
+	public List<Produto> getProdutos() {
+		return this.produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public Produto addProduto(Produto produto) {
+		getProdutos().add(produto);
+		produto.setTipoProduto(this);
+
+		return produto;
+	}
+
+	public Produto removeProduto(Produto produto) {
+		getProdutos().remove(produto);
+		produto.setTipoProduto(null);
+
+		return produto;
 	}
 
 }

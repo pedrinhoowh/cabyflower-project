@@ -1,149 +1,144 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the USUARIO database table.
+ * 
+ */
 @Entity
-@Table(name = "USUARIO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUser", scope = Usuario.class)
-public class Usuario implements Serializable{
-	
-	private static final long serialVersionUID = 3180067818970738965L;
-	
+@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name = "SEQ_USER", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idUser;
-	
-	@Size(max = 400)
-	@Column(name = "DES_LOGIN", nullable = false, unique = true)
-	private String loginUser;
-	
-	@Size(max = 400)
-	@Column(name = "DES_SENHA", nullable = false)
-	private String password;
-	
-	@OneToOne(mappedBy = "tipoUsuario")
-	@JoinColumn(name = "SEQ_TIPO_USUARIO", nullable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_USER")
+	private String seqUser;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="DAT_CRIACAO")
+	private Date datCriacao;
+
+	@Column(name="DES_LOGIN")
+	private String desLogin;
+
+	@Column(name="DES_SENHA")
+	private String desSenha;
+
+	@Column(name="NOM_FANTASIA")
+	private String nomFantasia;
+
+	//bi-directional many-to-one association to Empresa
+	@OneToMany(mappedBy="usuario")
+	private List<Empresa> empresas;
+
+	//bi-directional many-to-one association to TipoUsuario
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_TIPO_USUARIO")
 	private TipoUsuario tipoUsuario;
-	
-    @Temporal(TemporalType.DATE)
-	@Column(name = "DAT_CRIACAO", nullable = false)
-	private LocalDate dataCriacao;
-	
-	@Column(name = "ATV_USER", nullable = false)
-	private Boolean ativo = true;
-	
-	public Long getIdUser() {
-		return idUser;
+
+	//bi-directional many-to-one association to UsuarioComum
+	@OneToMany(mappedBy="usuario")
+	private List<UsuarioComum> usuarioComums;
+
+	public Usuario() {
 	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public String getSeqUser() {
+		return this.seqUser;
 	}
 
-	public String getLoginUser() {
-		return loginUser;
+	public void setSeqUser(String seqUser) {
+		this.seqUser = seqUser;
 	}
 
-	public void setLoginUser(String loginUser) {
-		this.loginUser = loginUser;
+	public Date getDatCriacao() {
+		return this.datCriacao;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setDatCriacao(Date datCriacao) {
+		this.datCriacao = datCriacao;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getDesLogin() {
+		return this.desLogin;
+	}
+
+	public void setDesLogin(String desLogin) {
+		this.desLogin = desLogin;
+	}
+
+	public String getDesSenha() {
+		return this.desSenha;
+	}
+
+	public void setDesSenha(String desSenha) {
+		this.desSenha = desSenha;
+	}
+
+	public String getNomFantasia() {
+		return this.nomFantasia;
+	}
+
+	public void setNomFantasia(String nomFantasia) {
+		this.nomFantasia = nomFantasia;
+	}
+
+	public List<Empresa> getEmpresas() {
+		return this.empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+	public Empresa addEmpresa(Empresa empresa) {
+		getEmpresas().add(empresa);
+		empresa.setUsuario(this);
+
+		return empresa;
+	}
+
+	public Empresa removeEmpresa(Empresa empresa) {
+		getEmpresas().remove(empresa);
+		empresa.setUsuario(null);
+
+		return empresa;
 	}
 
 	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+		return this.tipoUsuario;
 	}
 
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public LocalDate getDataCriacao() {
-		return dataCriacao;
+	public List<UsuarioComum> getUsuarioComums() {
+		return this.usuarioComums;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
-		this.dataCriacao = dataCriacao;
+	public void setUsuarioComums(List<UsuarioComum> usuarioComums) {
+		this.usuarioComums = usuarioComums;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public UsuarioComum addUsuarioComum(UsuarioComum usuarioComum) {
+		getUsuarioComums().add(usuarioComum);
+		usuarioComum.setUsuario(this);
+
+		return usuarioComum;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public UsuarioComum removeUsuarioComum(UsuarioComum usuarioComum) {
+		getUsuarioComums().remove(usuarioComum);
+		usuarioComum.setUsuario(null);
+
+		return usuarioComum;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
-		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
-		result = prime * result + ((loginUser == null) ? 0 : loginUser.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Usuario))
-			return false;
-		Usuario other = (Usuario) obj;
-		if (ativo == null) {
-			if (other.ativo != null)
-				return false;
-		} else if (!ativo.equals(other.ativo))
-			return false;
-		if (dataCriacao == null) {
-			if (other.dataCriacao != null)
-				return false;
-		} else if (!dataCriacao.equals(other.dataCriacao))
-			return false;
-		if (idUser == null) {
-			if (other.idUser != null)
-				return false;
-		} else if (!idUser.equals(other.idUser))
-			return false;
-		if (loginUser == null) {
-			if (other.loginUser != null)
-				return false;
-		} else if (!loginUser.equals(other.loginUser))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
-	
 }

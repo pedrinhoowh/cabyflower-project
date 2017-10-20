@@ -1,60 +1,94 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+/**
+ * The persistent class for the MUNICIPIO database table.
+ * 
+ */
 @Entity
-@Table(name = "MUNICIPIO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idMunicipio", scope = Municipio.class)
-public class Municipio implements Serializable{
-	
-	private static final long serialVersionUID = 3180067818970738965L;
+@NamedQuery(name="Municipio.findAll", query="SELECT m FROM Municipio m")
+public class Municipio implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "SEQ_MUNICIPIO", nullable = false, unique = true)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idMunicipio;
-	
-	@Size(max = 500)
-	@Column(name = "NOM_MUNICIPIO", nullable = false)
-	private String nomeMunicipio;
-	
-	@JoinColumn(name = "SEQ_UF", nullable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="SEQ_MUNICIPIO")
+	private String seqMunicipio;
+
+	@Column(name="DES_BAIRRO")
+	private String desBairro;
+
+	@Column(name="NOM_MUNICIPIO")
+	private String nomMunicipio;
+
+	//bi-directional many-to-one association to Endereco
+	@OneToMany(mappedBy="municipio")
+	private List<Endereco> enderecos;
+
+	//bi-directional many-to-one association to Uf
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SEQ_UF")
 	private Uf uf;
 
-	public Long getIdMunicipio() {
-		return idMunicipio;
+	public Municipio() {
 	}
 
-	public void setIdMunicipio(Long idMunicipio) {
-		this.idMunicipio = idMunicipio;
+	public String getSeqMunicipio() {
+		return this.seqMunicipio;
 	}
 
-	public String getNomeMunicipio() {
-		return nomeMunicipio;
+	public void setSeqMunicipio(String seqMunicipio) {
+		this.seqMunicipio = seqMunicipio;
 	}
 
-	public void setNomeMunicipio(String nomeMunicipio) {
-		this.nomeMunicipio = nomeMunicipio;
+	public String getDesBairro() {
+		return this.desBairro;
+	}
+
+	public void setDesBairro(String desBairro) {
+		this.desBairro = desBairro;
+	}
+
+	public String getNomMunicipio() {
+		return this.nomMunicipio;
+	}
+
+	public void setNomMunicipio(String nomMunicipio) {
+		this.nomMunicipio = nomMunicipio;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return this.enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public Endereco addEndereco(Endereco endereco) {
+		getEnderecos().add(endereco);
+		endereco.setMunicipio(this);
+
+		return endereco;
+	}
+
+	public Endereco removeEndereco(Endereco endereco) {
+		getEnderecos().remove(endereco);
+		endereco.setMunicipio(null);
+
+		return endereco;
 	}
 
 	public Uf getUf() {
-		return uf;
+		return this.uf;
 	}
 
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	
+
 }
