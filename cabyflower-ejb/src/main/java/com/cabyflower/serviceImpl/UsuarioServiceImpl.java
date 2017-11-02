@@ -105,7 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public UsuarioDTO findOne(Long idUser) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT u FROM Usuario u WHERE u.idUser = :idUser ");
+		sql.append(" SELECT u FROM Usuario u WHERE u.seqUser = :idUser ");
 
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUser", idUser);
@@ -121,7 +121,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	 */
 	private Usuario getInEmail(String email) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT u FROM Usuario u WHERE u.loginUser = :email ");
+		sql.append(" SELECT u FROM Usuario u WHERE u.desLogin = :email ");
 
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("email", email);

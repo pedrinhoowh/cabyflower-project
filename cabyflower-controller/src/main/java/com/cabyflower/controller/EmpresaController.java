@@ -37,18 +37,21 @@ public class EmpresaController extends CabyflowerController {
 	
 	@GET
 	@Path("/get-empresa/{idEmpresa}")
+	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getEmpresa(@PathParam("idEmpresa") Long idEmpresa) {
 		return ok(empresaService.findOne(idEmpresa));
 	}
 	
 	@GET
 	@Path("/get-empresas")
+	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getEmpresasForFilter(@BeanParam EmpresaFIlterDTO empresaFilter) {
 		return ok(empresaService.getEmpresaForFilter(empresaFilter));
 	}
 	
 	@GET
 	@Path("/get-empresa/{idUser}")
+	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getEmpresaForUser(@PathParam("idUser") Long idUser) {
 		return ok(empresaService.getEmpresaForUsuario(idUser));
 	}

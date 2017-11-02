@@ -40,12 +40,14 @@ public class UsuarioController extends CabyflowerController {
 	}
 	
 	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("/get-usuario/{idUsuario}")
 	public Response getUsuario(@PathParam("idUsuario") Long idUsuario) {
 		return ok(usuarioService.findOne(idUsuario));
 	}
 	
 	@GET
+	@Produces(value = MediaType.APPLICATION_JSON)
 	@Path("/login-user/{dsEmail}/{dsPassword}")
 	public Response loginUser(@PathParam("dsEmail") String dsEmail, @PathParam("dsPassword") String dsPassword) {
 		try {

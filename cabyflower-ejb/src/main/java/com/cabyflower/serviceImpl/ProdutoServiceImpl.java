@@ -108,7 +108,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@SuppressWarnings("unchecked")
 	public List<ProdutoDTO> getProdutosForHome(){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT TOP 10 p FROM Produto p  order by p.dataCriacao ASC");
+		sql.append(" SELECT TOP 10 p FROM Produto p  order by p.datCriacao ASC");
 		Query query = em.createQuery(sql.toString());
 		return this.convertListProdutoInListProdutoDTO(query.getResultList());
 	}
@@ -139,7 +139,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	public ProdutoDTO getProduto(Long idProduto) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT p FROM Produto p ");
-		sql.append(" WHERE p.idProduto = :idProduto ");
+		sql.append(" WHERE p.seqProduto = :idProduto ");
 		
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idProduto", idProduto);

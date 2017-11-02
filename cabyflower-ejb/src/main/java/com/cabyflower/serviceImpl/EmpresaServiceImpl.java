@@ -96,7 +96,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public EmpresaDTO findOne(Long idEmpresa) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT e FROM Empresa e WHERE e.idEmpresa = :idEmpresa ");
+		sql.append(" SELECT e FROM Empresa e WHERE e.seqEmpresa = :idEmpresa ");
 
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idEmpresa", idEmpresa);
@@ -115,12 +115,12 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public List<EmpresaDTO> getEmpresaForFilter(EmpresaFIlterDTO empresaFilter){
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT e FROM Empresa e WHERE ");
-		sql.append(" e.endereco.municipio.nomeMunicipio = :nomeMunicipio ");
+		sql.append(" e.endereco.municipio.nomMunicipio = :nomeMunicipio ");
 		if(empresaFilter.getNomeFantasia() != null) {
-			sql.append(" AND e.nomeFantasia = :nomeFantasia ");
+			sql.append(" AND e.nomFantasia = :nomeFantasia ");
 		}
 		if(empresaFilter.getRazaoSocial() != null) {
-			sql.append(" AND e.razaoSocial = :razaoSocial ");
+			sql.append(" AND e.desRazaoSocial = :razaoSocial ");
 		}
 		
 		Query query = em.createQuery(sql.toString());
@@ -154,7 +154,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public EmpresaDTO getEmpresaForUsuario(Long idUsuario) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT e FROM Empresa e where e.usuario.idUser = :idUsuario ");
+		sql.append(" SELECT e FROM Empresa e where e.usuario.seqUser = :idUsuario ");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUsuario", idUsuario);
 		return this.convertEmpresaInEmpresaDTO((Empresa)query.getSingleResult());

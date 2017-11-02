@@ -35,12 +35,14 @@ public class ProdutoController extends CabyflowerController {
 	
 	@GET
 	@Path("/get-produto/{idProduto}")
+	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getProduto(@PathParam("idProduto") Long idProduto) {
 		return ok(produtoService.getProduto(idProduto));
 	}
 	
 	@GET
 	@Path("/get-produtos-for-home")
+	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getProdutosForHome() {
 		return ok(produtoService.getProdutosForHome());
 	}

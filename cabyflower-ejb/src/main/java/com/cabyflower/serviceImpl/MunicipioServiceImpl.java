@@ -90,7 +90,7 @@ public class MunicipioServiceImpl implements MunicipioService {
 	@Override
 	public List<MunicipioDTO> getAllMunicipioInUf(Long idUf){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT m FROM Municipio m WHERE m.uf.idUf = :idUf");
+		sql.append(" SELECT m FROM Municipio m WHERE m.uf.seqUf = :idUf");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUf", idUf);
 		return this.convertListEntityInListDTO(query.getResultList());
@@ -105,7 +105,7 @@ public class MunicipioServiceImpl implements MunicipioService {
 	@Override
 	public MunicipioDTO findOne(Long idMunicipio) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT m FROM Municipio m WHERE m.idMunicipio = :idMunicipio");
+		sql.append(" SELECT m FROM Municipio m WHERE m.seqMunicipio = :idMunicipio");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idMunicipio", idMunicipio);
 		return this.convertMunicipioInMunicipioDTO((Municipio) query.getSingleResult());

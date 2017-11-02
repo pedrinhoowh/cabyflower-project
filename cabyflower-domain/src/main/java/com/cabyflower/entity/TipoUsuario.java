@@ -24,7 +24,7 @@ public class TipoUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="SEQ_TIPO_USUARIO")
 	private Long seqTipoUsuario;
 

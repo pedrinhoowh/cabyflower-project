@@ -83,7 +83,7 @@ public class UfServiceImpl implements UfService {
 	@Override
 	public UfDTO findOne(Long idUf){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT u FROM Uf u where u.idUf = :idUf");
+		sql.append(" SELECT u FROM Uf u where u.seqUf = :idUf");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUf",idUf);
 		return this.convertUfInUfDTO((Uf) query.getSingleResult());

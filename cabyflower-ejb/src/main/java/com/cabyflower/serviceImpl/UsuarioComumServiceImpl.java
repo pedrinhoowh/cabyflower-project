@@ -83,7 +83,7 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	@Override
 	public UsuarioComumDTO findOne(Long idUser) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT u FROM UsuarioComum u WHERE u.idUsuarioComum = :idUser ");
+		sql.append(" SELECT u FROM UsuarioComum u WHERE u.seqUsuarioComum = :idUser ");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUser", idUser);
 		return this.convertEntityInDTO((UsuarioComum)query.getSingleResult());
@@ -98,7 +98,7 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	@Override
 	public UsuarioComumDTO getUsuarioComumForUsuario(Long idUsuario) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT u FROM UsuarioComum u WHERE u.usuario.idUser = :idUsuario ");
+		sql.append(" SELECT u FROM UsuarioComum u WHERE u.usuario.seqUser = :idUsuario ");
 		Query query = em.createQuery(sql.toString());
 		query.setParameter("idUsuario", idUsuario);
 		return this.convertEntityInDTO((UsuarioComum)query.getSingleResult());

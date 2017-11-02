@@ -16,7 +16,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="SEQ_USER")
 	private Long seqUser;
 
@@ -29,9 +29,6 @@ public class Usuario implements Serializable {
 
 	@Column(name="DES_SENHA")
 	private String desSenha;
-
-	@Column(name="NOM_FANTASIA")
-	private String nomFantasia;
 
 	//bi-directional many-to-one association to Empresa
 	@OneToMany(mappedBy="usuario")
@@ -79,14 +76,6 @@ public class Usuario implements Serializable {
 
 	public void setDesSenha(String desSenha) {
 		this.desSenha = desSenha;
-	}
-
-	public String getNomFantasia() {
-		return this.nomFantasia;
-	}
-
-	public void setNomFantasia(String nomFantasia) {
-		this.nomFantasia = nomFantasia;
 	}
 
 	public List<Empresa> getEmpresas() {
