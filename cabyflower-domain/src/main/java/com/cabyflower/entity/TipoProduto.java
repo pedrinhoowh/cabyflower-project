@@ -2,6 +2,8 @@ package com.cabyflower.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 
@@ -21,6 +23,7 @@ public class TipoProduto implements Serializable {
 	private Long seqTipoProduto;
 
 	@Column(name="DES_TIPO_PRODUTO")
+	@NotNull
 	private String desTipoProduto;
 
 	//bi-directional many-to-one association to Produto

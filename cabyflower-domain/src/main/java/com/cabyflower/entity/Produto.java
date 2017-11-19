@@ -13,8 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -22,6 +24,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
+@Table(name="PRODUTO")
 @NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,18 +36,22 @@ public class Produto implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
+	@NotNull
 	private Date datCriacao;
 
 	@Column(name="DES_PRODUTO")
 	private String desProduto;
 
 	@Column(name="NOM_PRODUTO")
+	@NotNull
 	private String nomProduto;
 
 	@Column(name="QUA_PRODUTO")
+	@NotNull
 	private BigInteger quaProduto;
 
 	@Column(name="VAL_PRODUTO")
+	@NotNull
 	private Double valProduto;
 
 	//bi-directional many-to-one association to Empresa

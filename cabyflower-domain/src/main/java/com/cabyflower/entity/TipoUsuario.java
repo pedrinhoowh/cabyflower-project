@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -29,6 +30,7 @@ public class TipoUsuario implements Serializable {
 	private Long seqTipoUsuario;
 
 	@Column(name="DES_TIPO_USUARIO")
+	@NotNull
 	private String desTipoUsuario;
 
 	//bi-directional many-to-one association to Usuario

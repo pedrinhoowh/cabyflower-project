@@ -2,6 +2,8 @@ package com.cabyflower.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 
@@ -10,6 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="MUNICIPIO")
 @NamedQuery(name="Municipio.findAll", query="SELECT m FROM Municipio m")
 public class Municipio implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +26,7 @@ public class Municipio implements Serializable {
 	private String desBairro;
 
 	@Column(name="NOM_MUNICIPIO")
+	@NotNull
 	private String nomMunicipio;
 
 	//bi-directional many-to-one association to Endereco
@@ -32,6 +36,7 @@ public class Municipio implements Serializable {
 	//bi-directional many-to-one association to Uf
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SEQ_UF")
+	@NotNull
 	private Uf uf;
 
 	public Municipio() {

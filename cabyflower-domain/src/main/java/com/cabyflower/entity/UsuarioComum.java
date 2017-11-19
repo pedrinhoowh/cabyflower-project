@@ -2,6 +2,8 @@ package com.cabyflower.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 
 
@@ -22,19 +24,23 @@ public class UsuarioComum implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_NASCIMENTO")
+	@NotNull
 	private Date datNascimento;
 
 	@Column(name="NOM_USUARIO_COMUM")
+	@NotNull
 	private String nomUsuarioComum;
 
 	//bi-directional many-to-one association to Endereco
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="SEQ_ENDERECO")
+	@NotNull
 	private Endereco endereco;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SEQ_USUARIO")
+	@NotNull
 	private Usuario usuario;
 
 	public UsuarioComum() {

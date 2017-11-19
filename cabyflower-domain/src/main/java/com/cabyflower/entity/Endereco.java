@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -31,15 +32,18 @@ public class Endereco implements Serializable {
 	private Long seqEndereco;
 
 	@Column(name="DES_BAIRRO")
+	@NotNull
 	private String desBairro;
 
 	@Column(name="DES_COMPLEMENTO")
 	private String desComplemento;
 
 	@Column(name="DES_RUA")
+	@NotNull
 	private String desRua;
 
 	@Column(name="NUM_ENDERECO")
+	@NotNull
 	private BigInteger numEndereco;
 
 	//bi-directional many-to-one association to Empresa

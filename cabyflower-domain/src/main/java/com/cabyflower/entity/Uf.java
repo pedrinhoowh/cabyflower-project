@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -17,6 +19,7 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
+@Table(name="UF")
 @NamedQuery(name="Uf.findAll", query="SELECT u FROM Uf u")
 public class Uf implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +30,7 @@ public class Uf implements Serializable {
 	private Long seqUf;
 
 	@Column(name="NOM_UF")
+	@NotNull
 	private String nomUf;
 
 	//bi-directional many-to-one association to Municipio

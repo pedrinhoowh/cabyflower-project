@@ -41,7 +41,7 @@ public class UsuarioComumController extends CabyflowerController {
 	}
 	
 	@GET
-	@Path("/get-usuario-comum/{idUsuario}")
+	@Path("/get-usuario-comum-usuario/{idUsuario}")
 	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getUsuarioComumForUsuario(@PathParam("idUsuario") Long idUsuario) {
 		return ok(usuarioComumService.getUsuarioComumForUsuario(idUsuario));

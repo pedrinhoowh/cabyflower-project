@@ -2,6 +2,8 @@ package com.cabyflower.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,25 +24,30 @@ public class Empresa implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
+	@NotNull
 	private Date datCriacao;
 
 	@Column(name="DES_RAZAO_SOCIAL")
+	@NotNull
 	private String desRazaoSocial;
 
 	@Column(name="NOM_FANTASIA")
 	private String nomFantasia;
 
 	@Column(name="TEX_CNPJ")
+	@NotNull
 	private String texCnpj;
 
 	//bi-directional many-to-one association to Endereco
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@NotNull
 	@JoinColumn(name="SEQ_ENDERECO")
 	private Endereco endereco;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SEQ_USUARIO")
+	@NotNull
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Produto
