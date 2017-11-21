@@ -1,7 +1,7 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class UsuarioComumDTO implements Serializable {
 	

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@Table(name = "ENDERECO")
 @NamedQuery(name="Endereco.findAll", query="SELECT e FROM Endereco e")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;

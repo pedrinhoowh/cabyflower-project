@@ -1,11 +1,19 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -14,6 +22,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+@Table(name = "USUARIO")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +31,6 @@ public class Usuario implements Serializable {
 	@Column(name="SEQ_USER")
 	private Long seqUser;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_CRIACAO")
 	@NotNull
 	private Date datCriacao;
@@ -35,19 +43,11 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String desSenha;
 
-	//bi-directional many-to-one association to Empresa
-	@OneToMany(mappedBy="usuario")
-	private List<Empresa> empresas;
-
 	//bi-directional many-to-one association to TipoUsuario
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SEQ_TIPO_USUARIO")
 	@NotNull
 	private TipoUsuario tipoUsuario;
-
-	//bi-directional many-to-one association to UsuarioComum
-	@OneToMany(mappedBy="usuario")
-	private List<UsuarioComum> usuarioComums;
 
 	public Usuario() {
 	}
@@ -84,56 +84,12 @@ public class Usuario implements Serializable {
 		this.desSenha = desSenha;
 	}
 
-	public List<Empresa> getEmpresas() {
-		return this.empresas;
-	}
-
-	public void setEmpresas(List<Empresa> empresas) {
-		this.empresas = empresas;
-	}
-
-	public Empresa addEmpresa(Empresa empresa) {
-		getEmpresas().add(empresa);
-		empresa.setUsuario(this);
-
-		return empresa;
-	}
-
-	public Empresa removeEmpresa(Empresa empresa) {
-		getEmpresas().remove(empresa);
-		empresa.setUsuario(null);
-
-		return empresa;
-	}
-
 	public TipoUsuario getTipoUsuario() {
 		return this.tipoUsuario;
 	}
 
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	public List<UsuarioComum> getUsuarioComums() {
-		return this.usuarioComums;
-	}
-
-	public void setUsuarioComums(List<UsuarioComum> usuarioComums) {
-		this.usuarioComums = usuarioComums;
-	}
-
-	public UsuarioComum addUsuarioComum(UsuarioComum usuarioComum) {
-		getUsuarioComums().add(usuarioComum);
-		usuarioComum.setUsuario(this);
-
-		return usuarioComum;
-	}
-
-	public UsuarioComum removeUsuarioComum(UsuarioComum usuarioComum) {
-		getUsuarioComums().remove(usuarioComum);
-		usuarioComum.setUsuario(null);
-
-		return usuarioComum;
 	}
 
 }

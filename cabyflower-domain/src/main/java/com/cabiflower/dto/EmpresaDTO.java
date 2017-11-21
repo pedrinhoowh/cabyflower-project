@@ -1,7 +1,7 @@
 package com.cabiflower.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class EmpresaDTO implements Serializable{

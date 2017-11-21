@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 /**
@@ -22,7 +22,6 @@ public class UsuarioComum implements Serializable {
 	@Column(name="SEQ_USUARIO_COMUM")
 	private Long seqUsuarioComum;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="DAT_NASCIMENTO")
 	@NotNull
 	private Date datNascimento;

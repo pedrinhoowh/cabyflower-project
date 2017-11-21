@@ -2,7 +2,7 @@ package com.cabiflower.dto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Date;
+import java.sql.Date;
 
 public class ProdutoDTO implements Serializable{
 

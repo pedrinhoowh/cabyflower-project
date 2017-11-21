@@ -1,5 +1,6 @@
 package com.cabyflower.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,9 +74,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 	 */
 	@Override
 	public List<ProdutoDTO> convertListProdutoInListProdutoDTO(List<Produto> listProduto) {
-		List<ProdutoDTO> listRetorno = new LinkedList<>();
-		listProduto.forEach(produtoDTO -> {
-			listRetorno.add(this.ConvertProdutoInProdutoDTO(produtoDTO));
+		List<ProdutoDTO> listRetorno = new ArrayList<ProdutoDTO>();
+		listProduto.forEach(produto -> {
+			listRetorno.add(this.ConvertProdutoInProdutoDTO(produto));
 		});
 		return listRetorno;
 	}
@@ -110,7 +111,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@SuppressWarnings("unchecked")
 	public List<ProdutoDTO> getProdutosForHome(){
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT TOP 10 p FROM Produto p  order by p.datCriacao ASC");
+		sql.append(" SELECT p FROM Produto p  order by p.datCriacao ASC");
 		Query query = em.createQuery(sql.toString());
 		return this.convertListProdutoInListProdutoDTO(query.getResultList());
 	}

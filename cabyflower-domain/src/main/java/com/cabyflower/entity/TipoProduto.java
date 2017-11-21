@@ -1,10 +1,15 @@
 package com.cabyflower.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -25,10 +30,6 @@ public class TipoProduto implements Serializable {
 	@Column(name="DES_TIPO_PRODUTO")
 	@NotNull
 	private String desTipoProduto;
-
-	//bi-directional many-to-one association to Produto
-	@OneToMany(mappedBy="tipoProduto")
-	private List<Produto> produtos;
 
 	public TipoProduto() {
 	}
@@ -51,28 +52,6 @@ public class TipoProduto implements Serializable {
 
 	public void setDesTipoProduto(String desTipoProduto) {
 		this.desTipoProduto = desTipoProduto;
-	}
-
-	public List<Produto> getProdutos() {
-		return this.produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-
-	public Produto addProduto(Produto produto) {
-		getProdutos().add(produto);
-		produto.setTipoProduto(this);
-
-		return produto;
-	}
-
-	public Produto removeProduto(Produto produto) {
-		getProdutos().remove(produto);
-		produto.setTipoProduto(null);
-
-		return produto;
 	}
 
 }

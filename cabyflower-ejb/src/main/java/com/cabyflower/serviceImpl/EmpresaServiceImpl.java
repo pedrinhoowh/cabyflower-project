@@ -61,7 +61,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 		empresa.setTexCnpj(empresaDTO.getCnpj());
 		empresa.setEndereco(enderecoService.convertEnderecoDTOInEndereco(empresaDTO.getEndereco()));
 		empresa.setNomFantasia(empresaDTO.getNomeFantasia());
-		empresa.setProdutos(produtoService.convertListProdutoDTOInListProduto(empresaDTO.getProdutos()));
 		empresa.setDesRazaoSocial(empresaDTO.getRazaoSocial());
 		empresa.setUsuario(usuarioService.convertUsuarioDTOInUsuario(empresaDTO.getUsuario()));
 		empresa.setDatCriacao(empresaDTO.getDataCriacao());
@@ -80,7 +79,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 		empresaDTO.setCnpj(empresa.getTexCnpj());
 		empresaDTO.setEndereco(enderecoService.convertEnderecoInEnderecoDTO(empresa.getEndereco()));
 		empresaDTO.setNomeFantasia(empresa.getNomFantasia());
-		empresaDTO.setProdutos(produtoService.convertListProdutoInListProdutoDTO(empresa.getProdutos()));
 		empresaDTO.setRazaoSocial(empresa.getDesRazaoSocial());
 		empresaDTO.setUsuario(usuarioService.convertUsuarioInUsuarioDTO(empresa.getUsuario()));
 		empresaDTO.setDataCriacao(empresa.getDatCriacao());
