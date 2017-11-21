@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -53,6 +54,10 @@ public class Produto implements Serializable {
 	@Column(name="VAL_PRODUTO")
 	@NotNull
 	private Double valProduto;
+	
+	@Column(name = "IMG_PRODUTO")
+	@Lob
+	private byte[] imagemProduto;
 
 	//bi-directional many-to-one association to Empresa
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -131,4 +136,13 @@ public class Produto implements Serializable {
 		this.tipoProduto = tipoProduto;
 	}
 
+	public byte[] getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(byte[] imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
+
+	
 }

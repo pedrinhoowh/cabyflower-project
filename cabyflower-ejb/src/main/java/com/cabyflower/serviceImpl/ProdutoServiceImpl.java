@@ -60,7 +60,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setQuaProduto(produtoDTO.getQuantidade());
 		produto.setValProduto(produtoDTO.getValorProduto());
 		produto.setTipoProduto(new TipoProduto(produtoDTO.getTipoProduto().getIdTipoProduto()));
-		produto.setDatCriacao(produtoDTO.getDataCriacao());;
+		produto.setDatCriacao(produtoDTO.getDataCriacao());
+		produto.setImagemProduto(produtoDTO.getImagemProduto() != null ? produtoDTO.getImagemProduto() : null);
 		return produto;
 	}
 
@@ -96,6 +97,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produtoDTO.setValorProduto(produto.getValProduto());
 		produtoDTO.setTipoProduto(new TipoProdutoDTO(produto.getTipoProduto().getSeqTipoProduto()));
 		produtoDTO.setDataCriacao(produto.getDatCriacao());
+		produtoDTO.setImagemProduto(produto.getImagemProduto() != null ? produto.getImagemProduto() : null);
 		return produtoDTO;
 	}
 	

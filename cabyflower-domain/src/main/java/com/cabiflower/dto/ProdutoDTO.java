@@ -23,6 +23,8 @@ public class ProdutoDTO implements Serializable{
 	private TipoProdutoDTO tipoProduto;
 	
 	private Date dataCriacao;
+	
+	private byte[] imagemProduto;
 
 	public Long getIdProduto() {
 		return idProduto;
@@ -86,6 +88,14 @@ public class ProdutoDTO implements Serializable{
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public byte[] getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(byte[] imagemProduto) {
+		this.imagemProduto = imagemProduto;
 	}
 	
 }
